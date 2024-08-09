@@ -4,6 +4,7 @@ import { type Metadata } from "next";
 import { k2d } from "~/components/fonts";
 import { ThemeProvider } from "~/components/theme-provider";
 import { ModeToggle } from "~/components/ui/mode-toggle";
+import NoSsr from "~/components/no-ssr";
 
 export const metadata: Metadata = {
   title: "Todo App",
@@ -17,22 +18,24 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${k2d.className}`}>
       <body>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          {/* Header Section */}
-          <div className="flex h-12 items-center justify-between border-b border-[#dbdbdb40] p-4 py-8">
-            <h1 className="text-foreground flex items-center text-3xl font-bold">
-              TODO
-            </h1>
-            <ModeToggle />
-          </div>
+        <NoSsr>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            {/* Header Section */}
+            <div className="flex h-12 items-center justify-between border-b border-[#dbdbdb40] p-4 py-8">
+              <h1 className="flex items-center text-3xl font-bold text-foreground">
+                TODO
+              </h1>
+              <ModeToggle />
+            </div>
 
-          {children}
-        </ThemeProvider>
+            {children}
+          </ThemeProvider>
+        </NoSsr>
       </body>
     </html>
   );
