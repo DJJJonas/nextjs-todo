@@ -14,6 +14,7 @@ export default function HomePage() {
   function addTodoHandler(data: FormData) {
     const itemInput = data.get("item") as string;
     addTodo({
+      order: todos.length + 1,
       title: itemInput.trimEnd(),
       completed: false,
       createdAt: new Date().toISOString(),

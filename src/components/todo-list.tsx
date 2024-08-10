@@ -37,18 +37,25 @@ export default function TodoList({
     setToDelete(null);
   }
 
+  function handleCheck(todo: Todo) {
+    return () => {
+      todo.completed = !todo.completed;
+      updateTodo(todo);
+      setTodos([...todos]);
+    };
+  }
+
   return (
     <AlertDialog>
-      <ul className="mx-4 flex flex-col gap-4">
+      <ul className="mx-2 flex flex-col gap-4">
         {todos.map((todo) => (
-          <li key={todo.id} className="flex items-center gap-4 text-lg">
+          <li
+            key={todo.id}
+            className="flex select-none items-center gap-4 rounded px-2 text-lg transition-[hover] hover:bg-muted/20 active:bg-muted/10"
+          >
             <Checkbox
               checked={todo.completed}
-              onCheckedChange={() => {
-                todo.completed = !todo.completed;
-                updateTodo(todo);
-                setTodos([...todos]);
-              }}
+              onCheckedChange={handleCheck(todo)}
             />
             <div className="grow">
               <p className="text-base leading-7 [&:not(:first-child)]:mt-6">
@@ -62,7 +69,11 @@ export default function TodoList({
             <DropdownMenu>
               {/* Show options button */}
               <DropdownMenuTrigger asChild>
-                <Button variant="ghost" size="icon">
+                <Button
+                  className="h-8 w-8 rounded-full"
+                  variant="ghost"
+                  size="icon"
+                >
                   <MoreHorizontal />
                   <span className="sr-only">Options</span>
                 </Button>
