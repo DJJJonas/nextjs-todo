@@ -5,7 +5,7 @@ import {
   DropdownMenuTrigger,
 } from "~/components/ui/dropdown-menu";
 
-import { MoreHorizontal } from "lucide-react";
+import { Edit, MoreHorizontal, Trash } from "lucide-react";
 import { useState } from "react";
 import { deleteTodo, updateTodo } from "~/lib/data";
 import { type Todo } from "~/lib/definitions";
@@ -70,10 +70,16 @@ export default function TodoList({
 
               {/* Options */}
               <DropdownMenuContent>
-                <DropdownMenuItem>Edit</DropdownMenuItem>
+                <DropdownMenuItem>
+                  <Edit className="mr-2 h-4 w-4" /> Edit
+                </DropdownMenuItem>
+
                 <AlertDialogTrigger asChild>
-                  <DropdownMenuItem onClick={() => setToDelete(todo)}>
-                    Delete
+                  <DropdownMenuItem
+                    className="text-destructive"
+                    onClick={() => setToDelete(todo)}
+                  >
+                    <Trash className="mr-2 h-4 w-4" /> Delete
                   </DropdownMenuItem>
                 </AlertDialogTrigger>
               </DropdownMenuContent>
@@ -86,7 +92,8 @@ export default function TodoList({
           <AlertDialogHeader>
             <AlertDialogTitle>Are you sure?</AlertDialogTitle>
             <AlertDialogDescription>
-              The item "{toDelete?.title}" will be permanently deleted.
+              The item &quot;{toDelete?.title}&quot; will be permanently
+              deleted.
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
