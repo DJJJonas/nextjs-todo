@@ -25,15 +25,17 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-            {/* Header Section */}
-            <div className="flex h-12 items-center justify-between border-b border-[#dbdbdb40] p-4 py-8">
-              <h1 className="flex items-center text-3xl font-bold text-foreground">
-                TODO
-              </h1>
-              <ModeToggle />
-            </div>
+            <div className="flex h-screen flex-col">
+              {/* Header Section */}
+              <div className="flex h-12 items-center justify-between border-b border-[#dbdbdb40] p-4 py-8">
+                <h1 className="flex items-center text-3xl font-bold text-foreground select-none">
+                  TODO
+                </h1>
+                <ModeToggle />
+              </div>
 
-            {children}
+              {children}
+            </div>
           </ThemeProvider>
         </NoSsr>
       </body>
